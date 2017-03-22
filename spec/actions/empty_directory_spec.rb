@@ -40,6 +40,13 @@ describe Thor::Actions::EmptyDirectory do
         expect(empty_directory("contents").relative_destination).to eq("doc/contents")
       end
     end
+
+    it "returns the relative destination to the original destination root with the same folder name" do
+      root_base = MyCounter.new([1, 2], {}, destination_root: "/sandbox")
+      root_base.inside("sandbox") do
+        expect(empty_directory("contents").relative_destination).to eq("sandbox/contents")
+      end
+    end
   end
 
   describe "#given_destination" do
